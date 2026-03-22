@@ -300,13 +300,22 @@ export default function HeroSection() {
     <section className="relative w-full h-[90vh] min-h-[600px] flex items-center overflow-hidden">
 
       {/* 🔥 Background Image with subtle zoom */}
-      <div className="absolute inset-0">
+      {/* <div className="absolute inset-0">
         <Image
           src="/images/services/clinic.webp"
           alt="Dr Arunima Dental Clinic"
           className="w-full h-full object-cover scale-105 animate-zoom"
         />
-      </div>
+      </div> */}
+      <div className="absolute inset-0">
+      <Image
+        src="/images/services/clinic.webp"
+        alt="Dr Arunima Dental Clinic"
+        fill
+        priority
+        className="object-cover scale-105 animate-zoom"
+      />
+    </div>
 
       {/* 🔥 Premium Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-teal-50/40 to-transparent" />

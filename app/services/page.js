@@ -1,5 +1,7 @@
 // 'use client';
 
+
+
 // import Link from 'next/link';
 // import Image from 'next/image';
 // import { motion } from 'framer-motion';
@@ -58,8 +60,9 @@
 
 // app/services/page.js
 
-import ServicesLandingPage from '@/app/components/services/ServicesLandingPage';
+// import ServicesLandingPage from '@/components/services/ServicesLandingPage';
 
+import ServicesLandingPage from "../components/services/ServicesLandingPage";
 export const metadata = {
   title: 'Dental Services | Dr. Arunima Mukherjee',
   description:

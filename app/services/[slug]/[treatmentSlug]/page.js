@@ -1,90 +1,70 @@
-// // // import { servicesMap } from "@/lib/servicesData";
-// // // import SingleTreatmentPage from "@/app/components/services/SingleTreatmentPage";
 
-// // // export default function TreatmentPage({ params }) {
-// // //   const { slug, treatmentSlug } = params;
+// import { notFound } from "next/navigation";
+// import SingleTreatmentPage from "../../../components/services/SingleTreatmentPage";
+// import { servicesMap } from "../../../../lib/servicesData";
 
-// // //   // Find main service
-// // //   const service = servicesMap[slug];
-// // //   if (!service) return <div>Service not found</div>;
+// // 🔥 SEO Metadata for treatment pages
+// export function generateMetadata({ params }) {
+//   const { slug, treatmentSlug } = params;
 
-// // //   // Find treatment inside main service
-// // //   const treatment = service.treatments?.find(
-// // //     (t) => t.slug === treatmentSlug
-// // //   );
-// // //   if (!treatment) return <div>Treatment not found</div>;
+//   const service = servicesMap[slug];
+//   if (!service) return {};
 
-// // //   return (
-// // //     <SingleTreatmentPage
-// // //       title={treatment.name}
-// // //       description={treatment.description}
-// // //       benefits={treatment.benefits}
-// // //       steps={treatment.steps}
-// // //       image={treatment.image}
-// // //     />
-// // //   );
-// // // }
+//   const treatment = service.treatments.find(
+//     (t) => t.slug === treatmentSlug
+//   );
+//   if (!treatment) return {};
 
-// // import servicesData from "@/lib/servicesData";
-
-// // export default function TreatmentPage({ params }) {
-// //   const { slug, treatmentSlug } = params;
-// //   const service = servicesData.find(s => s.slug === slug);
-// //   const treatment = service?.treatments.find(t => t.treatmentSlug === treatmentSlug);
-
-// //   if (!treatment) return <p>Treatment not found</p>;
-
-// //   return (
-// //     <div className="max-w-4xl mx-auto py-12 px-4">
-// //       <h1 className="text-4xl font-bold text-teal-900 mb-6">{treatment.name}</h1>
-// //       <p className="mb-6 text-gray-700">{treatment.fullDescription}</p>
-
-// //       <h2 className="text-2xl font-semibold text-teal-800 mt-8 mb-4">Benefits</h2>
-// //       <ul className="list-disc list-inside text-gray-600 mb-6">
-// //         {treatment.benefits.map((b, i) => <li key={i}>{b}</li>)}
-// //       </ul>
-
-// //       <h2 className="text-2xl font-semibold text-teal-800 mt-8 mb-4">Treatment Steps</h2>
-// //       <ol className="list-decimal list-inside text-gray-600">
-// //         {treatment.steps.map((s, i) => <li key={i}>{s}</li>)}
-// //       </ol>
-// //     </div>
-// //   );
-// // }
-
-// import SingleTreatmentPage from "@/app/components/services/SingleTreatmentPage";
-// import { servicesArray } from "@/lib/servicesData"; // Import your array
+//   return {
+//     title: `${treatment.name} | ${service.title}`,
+//     description: treatment.shortDescription,
+//     openGraph: {
+//       title: `${treatment.name} | ${service.title}`,
+//       description: treatment.shortDescription,
+//       url: `https://yourdomain.com/services/${slug}/${treatmentSlug}`,
+//       images: [
+//         {
+//           url: `https://yourdomain.com${treatment.image || service.image}`,
+//           width: 1200,
+//           height: 630,
+//           alt: treatment.name,
+//         },
+//       ],
+//     },
+//   };
+// }
 
 // export default function TreatmentPage({ params }) {
 //   const { slug, treatmentSlug } = params;
 
-//   // 1️⃣ Find the parent service
-//   const service = servicesArray.find((s) => s.slug === slug);
-//   if (!service) return <div>Service not found</div>;
+//   // ✅ Use servicesMap (fast + consistent)
+//   const service = servicesMap[slug];
+//   if (!service) return notFound();
 
-//   // 2️⃣ Find the specific treatment
-//   const treatment = service.treatments.find((t) => t.slug === treatmentSlug);
-//   if (!treatment) return <div>Treatment not found</div>;
+//   // ✅ Find treatment inside service
+//   const treatment = service.treatments.find(
+//     (t) => t.slug === treatmentSlug
+//   );
+//   if (!treatment) return notFound();
 
-//   // 3️⃣ Render the treatment page
 //   return (
 //     <SingleTreatmentPage
 //       title={treatment.name}
-//       description={treatment.shortDescription}
+//       description={treatment.fullDescription} // 🔥 use full content for SEO
 //       benefits={treatment.benefits}
 //       steps={treatment.steps}
-//       image={treatment.image || service.image} // fallback to service image
+//       image={treatment.image || service.image}
 //     />
 //   );
 // }
 
-import SingleTreatmentPage from "@/app/components/services/SingleTreatmentPage";
-import { servicesMap } from "@/lib/servicesData";
 import { notFound } from "next/navigation";
+import SingleTreatmentPage from "../../../components/services/SingleTreatmentPage";
+import { servicesMap } from "../../../../lib/servicesData";
 
-// 🔥 SEO Metadata for treatment pages
-export function generateMetadata({ params }) {
-  const { slug, treatmentSlug } = params;
+// 🔥 SEO Metadata (FIXED for Next.js 16)
+export async function generateMetadata({ params }) {
+  const { slug, treatmentSlug } = await params;
 
   const service = servicesMap[slug];
   if (!service) return {};
@@ -113,14 +93,13 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function TreatmentPage({ params }) {
-  const { slug, treatmentSlug } = params;
+// 🔥 Page (FIXED)
+export default async function TreatmentPage({ params }) {
+  const { slug, treatmentSlug } = await params;
 
-  // ✅ Use servicesMap (fast + consistent)
   const service = servicesMap[slug];
   if (!service) return notFound();
 
-  // ✅ Find treatment inside service
   const treatment = service.treatments.find(
     (t) => t.slug === treatmentSlug
   );
@@ -129,7 +108,7 @@ export default function TreatmentPage({ params }) {
   return (
     <SingleTreatmentPage
       title={treatment.name}
-      description={treatment.fullDescription} // 🔥 use full content for SEO
+      description={treatment.fullDescription}
       benefits={treatment.benefits}
       steps={treatment.steps}
       image={treatment.image || service.image}

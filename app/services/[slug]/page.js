@@ -1,4 +1,82 @@
 
+// // // import SingleServicePage from '@/app/components/services/SingleServicePage';
+// // // import { servicesArray, servicesMap } from '@/lib/servicesData';
+// // // import { notFound } from 'next/navigation';
+
+// // // // --- Metadata generation using servicesMap for quick lookup
+// // // export function generateMetadata({ params }) {
+// // //   const service = servicesMap[params.slug];
+// // //   if (!service) return {};
+
+// // //   return {
+// // //     title: `${service.title} | Dr. Arunima Mukherjee`,
+// // //     description: service.description,
+// // //     openGraph: {
+// // //       title: `${service.title} | Dr. Arunima Mukherjee`,
+// // //       description: service.description,
+// // //       url: `https://yourdomain.com/services/${params.slug}`,
+// // //       images: [
+// // //         {
+// // //           url: `https://yourdomain.com${service.image}`,
+// // //           width: 1200,
+// // //           height: 630,
+// // //           alt: service.title,
+// // //         },
+// // //       ],
+// // //     },
+// // //   };
+// // // }
+
+// // // export default function ServicePage({ params }) {
+// // //   const service = servicesMap[params.slug];
+// // //   if (!service) return notFound();
+
+// // //   const breadcrumbSchema = {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "BreadcrumbList",
+// // //     "itemListElement": [
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 1,
+// // //         "name": "Home",
+// // //         "item": "https://yourdomain.com"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 2,
+// // //         "name": "Services",
+// // //         "item": "https://yourdomain.com/services"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 3,
+// // //         "name": service.title,
+// // //         "item": `https://yourdomain.com/services/${service.slug}`
+// // //       }
+// // //     ]
+// // //   };
+
+// // //   return (
+// // //     <>
+// // //       <SingleServicePage
+// // //         title={service.title}
+// // //         description={service.description}
+// // //         image={service.image}
+// // //         benefits={service.benefits}
+// // //         schema={service.schema}
+// // //       />
+
+// // //       {/* Inject JSON-LD for service + breadcrumb */}
+// // //       <script
+// // //         type="application/ld+json"
+// // //         dangerouslySetInnerHTML={{
+// // //           __html: JSON.stringify([service.schema, breadcrumbSchema]),
+// // //         }}
+// // //       />
+// // //     </>
+// // //   );
+// // // }
+
 // // import SingleServicePage from '@/app/components/services/SingleServicePage';
 // // import { servicesArray, servicesMap } from '@/lib/servicesData';
 // // import { notFound } from 'next/navigation';
@@ -56,6 +134,21 @@
 // //     ]
 // //   };
 
+// //   const faqSchema = service.faq
+// //     ? {
+// //         "@context": "https://schema.org",
+// //         "@type": "FAQPage",
+// //         "mainEntity": service.faq.map(({ question, answer }) => ({
+// //           "@type": "Question",
+// //           "name": question,
+// //           "acceptedAnswer": {
+// //             "@type": "Answer",
+// //             "text": answer
+// //           }
+// //         }))
+// //       }
+// //     : null;
+
 // //   return (
 // //     <>
 // //       <SingleServicePage
@@ -64,22 +157,27 @@
 // //         image={service.image}
 // //         benefits={service.benefits}
 // //         schema={service.schema}
+// //         faq={service.faq}
 // //       />
 
-// //       {/* Inject JSON-LD for service + breadcrumb */}
+// //       {/* Inject structured data */}
 // //       <script
 // //         type="application/ld+json"
 // //         dangerouslySetInnerHTML={{
-// //           __html: JSON.stringify([service.schema, breadcrumbSchema]),
+// //           __html: JSON.stringify(
+// //             [service.schema, breadcrumbSchema, faqSchema].filter(Boolean)
+// //           ),
 // //         }}
 // //       />
 // //     </>
 // //   );
 // // }
 
-// import SingleServicePage from '@/app/components/services/SingleServicePage';
-// import { servicesArray, servicesMap } from '@/lib/servicesData';
+// // import SingleServicePage from '@/../components/services/SingleServicePage';
+// // import { servicesMap } from '@/lib/servicesData';
 // import { notFound } from 'next/navigation';
+// import SingleServicePage from '../../components/services/SingleServicePage';
+// import { servicesMap } from '../../../lib/servicesData';
 
 // // --- Metadata generation using servicesMap for quick lookup
 // export function generateMetadata({ params }) {
@@ -106,9 +204,10 @@
 // }
 
 // export default function ServicePage({ params }) {
-//   const service = servicesMap[params.slug];
+//   // const service = servicesMap[params.slug];
 //   if (!service) return notFound();
 
+//   // --- Breadcrumb schema
 //   const breadcrumbSchema = {
 //     "@context": "https://schema.org",
 //     "@type": "BreadcrumbList",
@@ -134,7 +233,8 @@
 //     ]
 //   };
 
-//   const faqSchema = service.faq
+//   // --- FAQ schema (only if FAQ exists and is non-empty)
+//   const faqSchema = Array.isArray(service.faq) && service.faq.length > 0
 //     ? {
 //         "@context": "https://schema.org",
 //         "@type": "FAQPage",
@@ -157,10 +257,11 @@
 //         image={service.image}
 //         benefits={service.benefits}
 //         schema={service.schema}
-//         faq={service.faq}
+//         treatments={service.treatments} 
+//         faq={service.faq} // Pass FAQ to render accordion
 //       />
 
-//       {/* Inject structured data */}
+//       {/* Inject JSON-LD for service, breadcrumbs, and FAQ */}
 //       <script
 //         type="application/ld+json"
 //         dangerouslySetInnerHTML={{
@@ -173,13 +274,15 @@
 //   );
 // }
 
-import SingleServicePage from '@/app/components/services/SingleServicePage';
-import { servicesMap } from '@/lib/servicesData';
 import { notFound } from 'next/navigation';
+import SingleServicePage from '../../components/services/SingleServicePage';
+import { servicesMap } from '../../../lib/servicesData';
 
-// --- Metadata generation using servicesMap for quick lookup
-export function generateMetadata({ params }) {
-  const service = servicesMap[params.slug];
+// --- Metadata generation (FIXED for Next.js 16)
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  const service = servicesMap[slug];
   if (!service) return {};
 
   return {
@@ -188,7 +291,7 @@ export function generateMetadata({ params }) {
     openGraph: {
       title: `${service.title} | Dr. Arunima Mukherjee`,
       description: service.description,
-      url: `https://yourdomain.com/services/${params.slug}`,
+      url: `https://yourdomain.com/services/${slug}`,
       images: [
         {
           url: `https://yourdomain.com${service.image}`,
@@ -201,8 +304,11 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function ServicePage({ params }) {
-  const service = servicesMap[params.slug];
+// --- Page component (FIXED)
+export default async function ServicePage({ params }) {
+  const { slug } = await params;
+
+  const service = servicesMap[slug];
   if (!service) return notFound();
 
   // --- Breadcrumb schema
@@ -231,7 +337,7 @@ export default function ServicePage({ params }) {
     ]
   };
 
-  // --- FAQ schema (only if FAQ exists and is non-empty)
+  // --- FAQ schema
   const faqSchema = Array.isArray(service.faq) && service.faq.length > 0
     ? {
         "@context": "https://schema.org",
@@ -255,11 +361,11 @@ export default function ServicePage({ params }) {
         image={service.image}
         benefits={service.benefits}
         schema={service.schema}
-        treatments={service.treatments} 
-        faq={service.faq} // Pass FAQ to render accordion
+        treatments={service.treatments}
+        faq={service.faq}
       />
 
-      {/* Inject JSON-LD for service, breadcrumbs, and FAQ */}
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

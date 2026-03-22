@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { servicesArray } from '@/lib/servicesData';
+import { servicesArray } from '@/../lib/servicesData';
 
 export const metadata = {
   title: 'Dental Services | Dr. Arunima Mukherjee',
