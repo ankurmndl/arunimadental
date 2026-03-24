@@ -321,7 +321,7 @@ export default function Navbar() {
             href="/book"
             className="md:hidden text-sm bg-teal-600 text-white px-3 py-2 rounded-md shadow-sm"
           >
-            Book
+            Book Appt
           </Link>
 
           {/* 📱 Mobile Menu Button */}
