@@ -57,7 +57,6 @@
 //     </section>
 //   );
 // }
-
 'use client';
 
 import { MapPin, Clock, Phone } from 'lucide-react';
@@ -70,11 +69,11 @@ export default function LocationSection() {
         {/* 🔥 Text Info */}
         <div>
           <h2 className="text-3xl md:text-4xl font-bold text-teal-800 mb-4">
-            Visit Exthetix Dental
+            Visit Esthetix Dental
           </h2>
 
           <p className="text-gray-700 mb-6">
-            Conveniently located in Ranchi, Exthetix Dental offers modern,
+            Conveniently located in Ranchi, Esthetix Dental offers modern,
             gentle dental care in a comfortable and hygienic environment.
           </p>
 
@@ -86,7 +85,7 @@ export default function LocationSection() {
               <div>
                 <p className="font-semibold text-gray-800">Clinic Address</p>
                 <p className="text-gray-600">
-                  Exthetix Dental <br />
+                  Esthetix Dental <br />
                   107, Modi Heights, Opp. All India Radio <br />
                   Ranchi, Jharkhand – 834001 <br />
                   <span className="text-sm text-gray-500">
@@ -151,7 +150,7 @@ export default function LocationSection() {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.9603044585747!2d85.31353879999999!3d23.3789062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e117426d20b7%3A0xe135a9c47073eb1c!2sEsthetix%20Dental!5e1!3m2!1sen!2sin!4v1754383730847!5m2!1sen!2sin"
             className="w-full h-full border-0"
             loading="lazy"
-            title="Exthetix Dental Ranchi Location"
+            title="Esthetix Dental Ranchi Location"
           ></iframe>
         </div>
 
