@@ -117,7 +117,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Best Dental Clinic in Ranchi | Esthetix Dental",
+  title: " Esthetix Dental | Best Dental Clinic in Ranchi | Best Dentist in Ranchi ",
   description:
     "Esthetix Dental is a trusted dental clinic in Ranchi offering implants, root canal, cosmetic dentistry, and smile design with 10+ years experience.",
   keywords: [
@@ -162,7 +162,7 @@ export default function RootLayout({ children }) {
     image: "https://esthetixdentalcare.in/images/clinic.webp",
     url: "https://esthetixdentalcare.in",
     telephone: "+917677279977", // ⚠️ replace with real number
-    priceRange: "₹₹",
+    priceRange: "₹300",
     address: {
       "@type": "PostalAddress",
       streetAddress:
@@ -190,6 +190,17 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(dentistSchema),
+          }}
+        />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-DD3Q69JC7Y`}></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DD3Q69JC7Y');
+            `,
           }}
         />
       </head>
