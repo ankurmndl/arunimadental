@@ -116,7 +116,7 @@ export default function LocationSection() {
                 <p className="font-semibold text-gray-800">Clinic Hours</p>
                 <p className="text-gray-600">
                   Mon – Sat: 10:00 AM – 7:00 PM <br />
-                  Sunday: Closed
+                  Sunday: With Prior Appointments
                 </p>
               </div>
             </div>

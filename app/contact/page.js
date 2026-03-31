@@ -4,7 +4,7 @@ import LocationSection from "../components/LocationSection";
 
 export default function ContactPage() {
   return (
-    <main className="pt-24">
+    <main >
       <LocationSection />
     </main>
   );
