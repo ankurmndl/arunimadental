@@ -49,7 +49,7 @@ export default function BracesPageClient() {
               className="object-cover rounded-2xl md:rounded-none md:rounded-l-3xl"
             /> */}
             <Image
-            src="/images/services/root-canal.webp"
+            src="/images/services/early-braces.webp"
             alt="Root Canal Treatment"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"

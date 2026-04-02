@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 import BookAppointment from '../components/BookAppointment';
+// import BookAppointment from '../components/BookAppointment';
 
 export default function RootCanalPageClient() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -43,7 +44,7 @@ export default function RootCanalPageClient() {
             className="relative h-[400px] md:h-[500px]"
           >
             <Image
-              src="/images/services/root-canal.webp"
+              src="/images/services/dental-cleaning.webp"
               alt="Root Canal Treatment"
               fill
               className="object-cover rounded-2xl md:rounded-none md:rounded-l-3xl"

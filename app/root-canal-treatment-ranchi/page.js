@@ -1,6 +1,6 @@
 // import RootCanalPageClient from "./RootCanalPageClient";
 
-import RootCanalPageClient from "../components/RootCanalPageClient";
+import RootCanalPageClient from "./RootCanalPageClient";
 
 export const metadata = {
   title: "Root Canal Treatment in Ranchi | Esthetix Dental",
